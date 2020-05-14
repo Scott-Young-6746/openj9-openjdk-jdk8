@@ -44,6 +44,7 @@ AC_DEFUN_ONCE([CUSTOM_EARLY_HOOK],
   OPENJ9_CONFIGURE_DDR
   OPENJ9_CONFIGURE_JITSERVER
   OPENJ9_CONFIGURE_OPENJDK_METHODHANDLES
+  OPENJ9_CONFIGURE_MICROJIT
 
   if test "x$OPENJDK_TARGET_OS" = xwindows ; then
     BASIC_SETUP_OUTPUT_DIR
@@ -263,6 +264,31 @@ AC_DEFUN([OPENJ9_CONFIGURE_OPENJDK_METHODHANDLES],
   fi
 
   AC_SUBST(OPENJ9_ENABLE_OPENJDK_METHODHANDLES)
+])
+
+AC_DEFUN([OPENJ9_CONFIGURE_MICROJIT],
+[
+  AC_ARG_ENABLE([microjit], [AS_HELP_STRING([--enable-microjit], [enable MicroJIT support @<:@disabled@:>@])])
+
+  AC_MSG_CHECKING([for microjit])
+  OPENJ9_ENABLE_MICROJIT=false
+  if test "x$enable_microjit" = xyes ; then
+    if test "x$OPENJDK_TARGET_OS" = xlinux ; then
+      AC_MSG_RESULT([yes (explicitly enabled)])
+      OPENJ9_ENABLE_MICROJIT=true
+    else
+      AC_MSG_RESULT([no (unsupported platform)])
+      AC_MSG_ERROR([MicroJIT is unsupported for $OPENJDK_TARGET_OS])
+    fi
+  elif test "x$enable_microjit" = xno ; then
+    AC_MSG_RESULT([no (explicitly disabled)])
+  elif test "x$enable_microjit" = x ; then
+    AC_MSG_RESULT([no (default)])
+  else
+    AC_MSG_ERROR([--enable-microjit accepts no argument])
+  fi
+
+  AC_SUBST(OPENJ9_ENABLE_MICROJIT)
 ])
 
 AC_DEFUN([OPENJ9_PLATFORM_SETUP],
