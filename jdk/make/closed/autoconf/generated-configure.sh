@@ -891,8 +891,8 @@ CYGWIN_LINK
 OUTPUT_ROOT
 CONF_NAME
 SPEC
-OPENJ9_ENABLE_OPENJDK_METHODHANDLES
 OPENJ9_ENABLE_MICROJIT
+OPENJ9_ENABLE_OPENJDK_METHODHANDLES
 OPENJ9_ENABLE_JITSERVER
 OPENJ9_ENABLE_DDR
 OPENJ9_GDK_HOME
@@ -4540,6 +4540,8 @@ VS_SDK_PLATFORM_NAME_2017=
 
 
 
+
+
 # Create a tool wrapper for use by cmake.
 # Consists of a shell script which wraps commands with an invocation of fixpath.
 # OPENJ9_GENERATE_TOOL_WRAPER(<name_of_wrapper>, <command_to_call>)
@@ -4550,7 +4552,7 @@ VS_SDK_PLATFORM_NAME_2017=
 
 
 # Do not change or remove the following line, it is needed for consistency checks:
-DATE_WHEN_GENERATED=1600276123
+DATE_WHEN_GENERATED=1602789392
 
 ###############################################################################
 #
@@ -15949,6 +15951,11 @@ $as_echo "no (explicitly disabled)" >&6; }
 $as_echo "no (default)" >&6; }
   else
     as_fn_error $? "--enable-openjdk-methodhandles accepts no argument" "$LINENO" 5
+  fi
+
+
+
+
   # Check whether --enable-microjit was given.
 if test "${enable_microjit+set}" = set; then :
   enableval=$enable_microjit;
